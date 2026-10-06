@@ -7,18 +7,19 @@ const trash = document.getElementsByClassName("fa-trash-o");
 Array.from(unpaid).forEach(function (element) {
   element.addEventListener('click', function () {
 
-    element.innerText = element.innerText === 'Paid' ? 'Unpaid' : 'Paid'
-    // need a : after the green
-    element.style.background = element.innerText === 'Paid' ? 'green' : ''
+    // element.innerText = element.innerText === 'Paid' ? 'Unpaid' : 'Paid'
+    // // need a : after the green
+    // element.style.background = element.innerText === 'Paid' ? 'green' : ''
     const id = element.dataset.id
-    const unpaidStat = element.innerText === 'Unpaid'
+    // const unpaidStat = element.innerText === 'Unpaid' ? true : false;
+    // console.log(unpaidStat)
     // const msg = this.parentNode.parentNode.childNodes[3].innerText
     // const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
     fetch('messages', {
       method: 'put',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        'unpaid': unpaidStat,
+        // 'unpaid': unpaidStat,
         'id': id
       })
     })

@@ -39,11 +39,11 @@ module.exports = function(app, passport, db) {
 
     app.put('/messages', (req, res) => {
       db.collection('messages')
-      .findOneAndUpdate({ _id: new ObjectId(req.body.id)}, {
+      .findOneAndUpdate({ _id: new ObjectId(req.body.id)}, [{
         $set: {
-          unpaid: req.body.unpaid
+          unpaid: { $not: ['$unpaid'] }
         }
-      }, {
+      }], {
         sort: {_id: -1},
         upsert: true
       }, (err, result) => {
