@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb')
 module.exports = function(app, passport, db) {
 
 // normal routes ===============================================================
@@ -38,9 +39,9 @@ module.exports = function(app, passport, db) {
 
     app.put('/messages', (req, res) => {
       db.collection('messages')
-      .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+      .findOneAndUpdate({ _id: new ObjectId(req.body.id)}, {
         $set: {
-          thumbUp:req.body.thumbUp + 1
+          unpaid: req.body.unpaid
         }
       }, {
         sort: {_id: -1},
